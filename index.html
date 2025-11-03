@@ -3,530 +3,800 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Junaid Ameer - Cybersecurity Student & Tech Creator</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>Trustlyzer by Junaid | Browse Fearlessly. Stay Secure.</title>
+    <!-- Load Tailwind CSS for modern, responsive, dark-themed styling --><script src="https://cdn.tailwindcss.com"></script>
     <style>
-        /* CSS RESET AND BASE STYLES */
+        /* --- CSS VARIABLES & BASE STYLES --- */
         :root {
-            --color-primary: #00eaff; /* Neon Blue-Green */
-            --color-secondary: #0077b6; /* Deeper Blue */
-            --color-text: #e0f7fa; /* Light Text */
-            --color-bg: #0d1b2a; /* Dark Blue/Black Background */
-            --color-card-bg: #1b263b; /* Slightly lighter card BG */
-            --glow-shadow: 0 0 10px rgba(0, 234, 255, 0.7);
-            --glow-light: 0 0 5px var(--color-primary);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            --bg-deep: #060914; /* Deep, rich navy for background (Same as Portfolio) */
+            --card-bg: #111827; /* Slate 900 for card */
+            --text-light: #f8fafc;
+            --primary-color: #4f46e5; /* Stronger Indigo 600 */
+            --accent-aqua: #00e5ff; /* Aqua for Cyber Glow (Used for button glow) */
+            --safe-color: #10b981; /* Emerald 500 */
+            --warning-color: #f59e0b; /* Amber 500 */
+            --unsafe-color: #ef4444; /* Red 500 */
+            --safe-bg: #064e3b; /* Deep green for safe card bg */
+            --warning-bg: #78350f; /* Deep orange for warning card bg */
+            --unsafe-bg: #7f1d1d; /* Deep red for unsafe card bg */
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--color-bg);
-            color: var(--color-text);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-light);
+            transition: all 0.5s ease;
+            /* Deeper, more interesting radial gradient */
+            background-image: radial-gradient(at 0% 0%, #0d1222 0%, #172554 100%);
+            background-attachment: fixed;
         }
 
-        a {
-            color: var(--color-primary);
-            text-decoration: none;
-            transition: color 0.3s;
+        /* Improved Header Branding */
+        .brand-name {
+            font-size: 2.75rem; /* Slightly larger */
+            font-weight: 900; /* Even bolder */
+            letter-spacing: -0.06em; /* Tighter for impact */
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(79, 70, 229, 0.6); /* More prominent glow */
+        }
+        
+        /* New Custom CSS for the Input Bar Focus Glow */
+        #input-group-wrapper {
+            transition: all 0.3s ease-in-out;
+            border: 2px solid transparent; /* Start with a subtle border */
+            border-radius: 1.25rem; /* Match input's rounded-xl */
         }
 
-        a:hover {
-            color: #00ffff;
+        .input-focus-glow {
+            /* Futuristic purple/blue outer glow on focus */
+            box-shadow: 0 0 20px rgba(79, 70, 229, 0.7), 0 0 40px rgba(79, 70, 229, 0.4);
+            border-color: var(--primary-color) !important;
         }
 
-        /* UTILITY CLASSES */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
+        /* Specific Input Field Styling for depth */
+        #url-input {
+            box-shadow: inset 0 5px 8px rgba(0, 0, 0, 0.5); /* Deeper inner shadow */
+            transition: box-shadow 0.3s ease, border-color 0.3s ease;
+            border-color: #334155; /* Slate-700 equivalent */
+        }
+        #url-input:focus {
+             border-color: var(--primary-color); /* Highlight border on input focus */
         }
 
-        /* HEADER & NAVIGATION */
-        header {
-            width: 100%;
-            padding: 20px 0;
-            background-color: var(--color-bg);
-            border-bottom: 1px solid rgba(0, 234, 255, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            text-shadow: var(--glow-light);
-        }
-
-        .contact-btn {
-            background-color: var(--color-primary);
-            color: var(--color-bg);
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
+        /* --- Scan Button Polishing Styles --- */
+        #scan-button {
+            border: 3px solid #6366f1; /* Vibrant Indigo 500 for border */
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.6); /* Primary color outer glow */
             transition: all 0.3s ease;
-            box-shadow: var(--glow-shadow);
         }
-
-        .contact-btn:hover {
-            background-color: #00ffff;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 1);
+        #scan-button:hover {
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.2);
         }
-
-        /* HERO SECTION (INTRODUCTION) */
-        .hero {
-            text-align: center;
-            padding: 60px 0 80px;
-        }
-
-        .profile-img {
-            width: 120px;
-            height: 120px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--color-primary);
-            box-shadow: var(--glow-shadow);
-            margin-bottom: 20px;
-        }
-
-        .main-heading {
-            font-size: 3rem;
+        
+        /* --- Project Card CTA Button Styling --- */
+        .project-cta {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            margin-top: 0.5rem;
             font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--color-primary);
-            text-shadow: var(--glow-light);
-        }
-
-        .tagline {
-            font-size: 1.2rem;
-            font-weight: 400;
-            max-width: 600px;
-            margin: 0 auto;
-            color: #b3c5cd;
-        }
-
-        /* PROJECTS SECTION */
-        .projects-section {
-            padding-bottom: 80px;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            margin-top: 40px;
-        }
-
-        .project-card {
-            background-color: var(--color-card-bg);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), var(--glow-light);
-            transition: transform 0.3s, box-shadow 0.3s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0, 234, 255, 0.3), var(--glow-shadow);
-        }
-
-        .project-image-container {
-            width: 100%;
-            height: 200px;
-            overflow: hidden;
-            border-bottom: 1px solid var(--color-primary);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s;
-        }
-
-        .project-card:hover .project-image {
-            transform: scale(1.05);
-        }
-
-        .project-content {
-            padding: 25px;
-            flex-grow: 1;
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            color: var(--color-primary);
-            margin-bottom: 10px;
-        }
-
-        .project-description {
-            font-size: 1rem;
-            color: #b3c5cd;
-            margin-bottom: 20px;
-        }
-
-        .project-actions {
-            display: flex;
-            gap: 15px;
-            margin-top: auto; /* Pushes buttons to the bottom */
-        }
-
-        .action-btn {
-            flex: 1;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background-color 0.3s, box-shadow 0.3s;
-            text-align: center;
-        }
-
-        .view-details-btn {
+            font-size: 0.875rem; /* text-sm */
+            border-radius: 0.5rem; /* rounded-lg */
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
             background-color: transparent;
-            color: var(--color-primary);
-            border: 2px solid var(--color-primary);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .project-cta:hover {
+            color: var(--text-light);
+            background-color: var(--primary-color);
+            box-shadow: 0 0 15px rgba(79, 70, 229, 0.8);
+            transform: translateY(-1px);
+        }
+        /* --- END NEW STYLES --- */
+
+        /* Loading spinner animation */
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            display: none;
         }
 
-        .view-details-btn:hover {
-            background-color: rgba(0, 234, 255, 0.1);
-            box-shadow: var(--glow-light);
+        .loading .spinner {
+            display: block;
         }
 
-        .visit-site-btn {
-            background-color: var(--color-primary);
-            color: var(--color-bg);
-            box-shadow: var(--glow-shadow);
+        .loading .scan-text {
+            display: none;
         }
 
-        .visit-site-btn:hover {
-            background-color: #00ffff;
-            box-shadow: 0 0 15px rgba(0, 255, 255, 1);
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        /* MODAL (Popup for Contact and View Details) */
-        .modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.85);
-            display: none; /* Hidden by default */
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            backdrop-filter: blur(5px);
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        /* Custom glow effect for the result card */
+        .result-card-glow {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); /* Stronger general shadow */
+            transition: box-shadow 0.6s ease-in-out, background-color 0.6s ease;
+        }
+
+        /* Specific glow styles based on result state */
+        .safe { box-shadow: 0 0 60px rgba(16, 185, 129, 0.8), inset 0 0 20px rgba(16, 185, 129, 0.3); background-color: rgba(6, 78, 59, 0.7); border: 1px solid var(--safe-color); } /* Emerald glow */
+        .suspicious { box-shadow: 0 0 60px rgba(245, 158, 11, 0.8), inset 0 0 20px rgba(245, 158, 11, 0.3); background-color: rgba(120, 53, 15, 0.7); border: 1px solid var(--warning-color); } /* Amber glow */
+        .unsafe { box-shadow: 0 0 60px rgba(239, 68, 68, 0.8), inset 0 0 20px rgba(239, 68, 68, 0.3); background-color: rgba(127, 29, 29, 0.7); border: 1px solid var(--unsafe-color); } /* Red glow */
+
+        /* Animation for result icon */
+        .animate-bounce {
+            animation: bounce 0.8s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+
+        /* Responsive adjustments for footer for better spacing on small screens */
+        @media (max-width: 768px) {
+            .brand-name {
+                font-size: 2rem; /* Slightly smaller on mobile */
+            }
+            .brand-name .ml-4 {
+                margin-left: 0.75rem; /* Reduce margin */
+                padding-left: 0.75rem; /* Reduce padding */
+            }
+            /* Adjust the footer button position for mobile (keep it centered above text) */
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+            }
+            #explore-projects-btn {
+                position: static;
+                margin-bottom: 1rem;
+            }
+        }
+        @media (min-width: 768px) {
+            /* Desktop button positioning */
+            #explore-projects-btn {
+                position: absolute;
+                top: 1rem;
+                right: 1rem;
+            }
         }
         
-        .modal.is-active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .modal-content {
-            background-color: var(--color-card-bg);
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 500px;
-            width: 90%;
-            box-shadow: var(--glow-shadow);
-            position: relative;
-            transform: scale(0.9);
-            transition: transform 0.3s ease;
-        }
-
-        .modal.is-active .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-header {
-            border-bottom: 1px solid rgba(0, 234, 255, 0.3);
-            padding-bottom: 15px;
-            margin-bottom: 15px;
-        }
-
-        .modal-header h3 {
-            color: var(--color-primary);
-            font-size: 1.8rem;
-        }
-
-        .modal-close-btn {
-            position: absolute;
-            top: 10px;
-            right: 15px;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            color: var(--color-primary);
-            cursor: pointer;
-        }
-
-        .modal-body p {
-            margin-bottom: 10px;
-        }
-
-        .social-links {
+        /* New Project Card Styles for distinction */
+        .project-card-v2 {
+            background-color: var(--card-bg);
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            margin-top: 15px;
+            border-left: 5px solid transparent;
+            padding: 1.5rem;
+        }
+        .project-card-v2:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
         }
         
-        .social-links a {
-            padding: 8px;
-            border-radius: 5px;
-            background-color: rgba(0, 234, 255, 0.1);
-            border: 1px solid rgba(0, 234, 255, 0.3);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: background-color 0.3s;
+        .project-cta-v2 {
+            display: inline-block;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            text-align: center;
+            border: 2px solid;
+            transition: all 0.3s ease;
         }
+        .project-cta-v2:hover {
+            color: white;
+            transform: translateY(-1px);
+        }
+        /* Specific project styles */
+        #phub-card { border-left-color: #10b981; }
+        #thub-card { border-left-color: #f59e0b; }
+        #psite-card { border-left-color: #6366f1; }
+        #cproj-card { border-left-color: #0ea5e9; }
         
-        .social-links a:hover {
-            background-color: rgba(0, 234, 255, 0.2);
-        }
+        #phub-card .project-cta-v2 { border-color: #10b981; color: #10b981; }
+        #phub-card .project-cta-v2:hover { background-color: #10b981; box-shadow: 0 0 10px #10b981; }
         
-        .social-links strong {
-            color: var(--color-primary);
-        }
+        #thub-card .project-cta-v2 { border-color: #f59e0b; color: #f59e0b; }
+        #thub-card .project-cta-v2:hover { background-color: #f59e0b; box-shadow: 0 0 10px #f59e0b; }
+        
+        #psite-card .project-cta-v2 { border-color: #6366f1; color: #6366f1; }
+        #psite-card .project-cta-v2:hover { background-color: #6366f1; box-shadow: 0 0 10px #6366f1; }
+        
+        #cproj-card .project-cta-v2 { border-color: #0ea5e9; color: #0ea5e9; }
+        #cproj-card .project-cta-v2:hover { background-color: #0ea5e9; box-shadow: 0 0 10px #0ea5e9; }
 
-        /* RESPONSIVENESS */
-        @media (max-width: 768px) {
-            .main-heading {
-                font-size: 2.5rem;
-            }
-            
-            .tagline {
-                font-size: 1rem;
-            }
-            
-            .projects-grid {
-                gap: 30px;
-            }
-            
-            .project-actions {
-                flex-direction: column;
-            }
-            
-            .action-btn {
-                width: 100%;
-            }
-        }
     </style>
 </head>
-<body>
+<body class="min-h-screen p-4 md:p-12 flex flex-col items-center">
 
-    <header>
-        <div class="container nav-content">
-            <span class="logo">J.Ameer</span>
-            <button class="contact-btn" id="contactMeBtn">Contact Me</button>
+    <!-- Header - Polished Branding --><header class="w-full max-w-5xl text-center mb-16">
+        <div class="brand-name mb-2 flex items-center justify-center">
+            <span class="text-primary-color text-5xl mr-3 transform rotate-[-10deg]">🛡️</span> 
+            Trustlyzer 
+            <!-- Polished "by Junaid" branding with improved tracking and a subtle divider --><span class="text-base ml-4 tracking-wide text-slate-300 font-medium border-l pl-4 border-indigo-500 opacity-90">by Junaid</span>
         </div>
+        <p class="text-2xl text-slate-300 font-light mt-1">Browse Fearlessly. Stay Secure.</p>
     </header>
 
-    <main class="container">
-        <section class="hero">
-            <img src="https://i.postimg.cc/VN814nwt/Gemini-Generated-Image-66v2dq66v2dq66v2.png" alt="Junaid Ameer Profile" class="profile-img">
-            <h1 class="main-heading">Junaid Ameer Projects</h1>
-            <p class="tagline">“Building digital tools that inspire trust, learning, and innovation.”</p>
-        </section>
+    <main class="w-full max-w-5xl">
+        
+        <!-- URL Input Section - Polished Look --><div id="input-section" class="bg-card-bg p-6 md:p-12 rounded-2xl shadow-2xl transition-all duration-700 border border-slate-700">
+            <h2 class="text-3xl font-bold mb-6 text-white text-center">Security Scan Initiated</h2>
+            <form id="url-form" onsubmit="scanWebsite(event)">
+                <!-- Input Group Wrapper for Enhanced Focus Glow --><div id="input-group-wrapper" class="flex flex-col md:flex-row gap-4 p-1 rounded-2xl transition-all duration-300 bg-slate-800 border-2 border-slate-700">
+                    <input 
+                        type="url" 
+                        id="url-input" 
+                        placeholder="Enter website URL (e.g., https://secure-site.com)" 
+                        required 
+                        class="flex-grow p-4 text-lg rounded-xl bg-transparent text-white focus:outline-none placeholder:text-slate-500 transition duration-300"
+                    />
+                    <button 
+                        type="submit" 
+                        id="scan-button"
+                        class="flex items-center justify-center px-8 py-4 bg-primary-color hover:bg-indigo-700 text-lg text-white font-extrabold rounded-xl shadow-xl transition duration-300 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02]"
+                    >
+                        <div id="spinner" class="spinner mr-3"></div>
+                        <span id="scan-text" class="scan-text">Scan Site</span>
+                    </button>
+                </div>
+            </form>
+            <p id="error-message" class="text-red-400 mt-4 text-sm text-center hidden"></p>
+        </div>
 
-        <section class="projects-section">
-            <div class="projects-grid">
+        <!-- How the Scan Works Section - Polished Look with Icon --><div class="mt-12 p-6 bg-slate-800 rounded-xl shadow-lg border border-slate-700">
+            <h3 class="text-xl font-semibold mb-3 text-primary-color flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                How the Scan Works (Simulated Heuristics)
+            </h3>
+            <p class="text-slate-400 text-sm leading-relaxed">
+                Trustlyzer analyzes multiple technical indicators (heuristics) to calculate a risk score, mimicking commercial services. We check for <strong>HTTPS presence</strong>, <strong>suspicious Top-Level Domains (TLDs)</strong>, <strong>potential Typosquatting</strong>, <strong>Domain Age</strong>, and <strong>Simulated Geo-IP Location</strong> to provide an immediate security assessment. This approach helps identify patterns common in phishing and scam attempts.
+            </p>
+        </div>
 
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="https://i.postimg.cc/9F2QJ6Bz/Whisk-821c7371a0cd8f2951046c942f29d982dr-1.jpg" alt="Trustlyzer Preview" class="project-image">
-                    </div>
-                    <div class="project-content">
-                        <h2 class="project-title">Trustlyzer</h2>
-                        <p class="project-description">A website safety checker tool that helps users verify if a site is safe or fake.</p>
-                        <div class="project-actions">
-                            <button class="action-btn view-details-btn" data-project="trustlyzer">View Details</button>
-                            <button class="action-btn visit-site-btn" data-url="trustlyzer.junaidprojects.online">Visit Site</button>
-                        </div>
+        <!-- Result Section (Initially Hidden) - Polished Appearance --><div id="result-section" class="mt-16 hidden transition-all duration-700 ease-out opacity-0">
+            <div id="result-card" class="result-card-glow p-8 md:p-12 rounded-2xl transition-all duration-500">
+                <div class="flex items-center mb-8">
+                    <span id="result-icon" class="text-6xl mr-6"></span> <!-- Icon animation handled by JS/CSS --><div>
+                        <p class="text-xl font-medium text-slate-300">Scan Status:</p>
+                        <h3 id="result-main-text" class="text-4xl font-extrabold"></h3>
                     </div>
                 </div>
 
-                <div class="project-card">
-                    <div class="project-image-container">
-                        <img src="https://i.postimg.cc/B6BVxnGw/Whisk-1001226c23e3b2c900f4d7520c0aae89dr-1.jpg" alt="TypeRush Preview" class="project-image">
+                <div id="result-details" class="space-y-6">
+                    <div id="current-url-display" class="bg-slate-700 p-4 rounded-xl text-lg break-all border-l-4 border-primary-color">
+                        <strong class="text-slate-400">URL Scanned:</strong> <span id="scanned-url" class="text-white font-mono"></span>
                     </div>
-                    <div class="project-content">
-                        <h2 class="project-title">TypeRush</h2>
-                        <p class="project-description">A typing learning platform for speed and accuracy improvement.</p>
-                        <div class="project-actions">
-                            <button class="action-btn view-details-btn" data-project="typerush">View Details</button>
-                            <button class="action-btn visit-site-btn" data-url="typerush.junaidprojects.online">Visit Site</button>
-                        </div>
+
+                    <!-- Heuristic Analysis Section - Polished List --><div class="bg-slate-800 p-5 rounded-xl shadow-inner border border-slate-700">
+                        <h4 class="text-2xl font-bold mb-4 text-white">Full Security Report:</h4>
+                        <ul id="analysis-list" class="space-y-3 text-base text-slate-300">
+                            <!-- Analysis points will be inserted here --></ul>
                     </div>
                 </div>
 
+                <div class="mt-8 flex flex-col md:flex-row md:justify-between items-center text-sm text-slate-400 border-t border-slate-700 pt-6">
+                    <p>Last Scan Time: <span id="scan-time" class="text-white font-semibold"></span></p>
+                    <div class="flex items-center mt-3 md:mt-0">
+                        <p class="mr-2">Simulated Privacy Score:</p>
+                        <span id="privacy-score" class="text-3xl font-extrabold"></span> <span class="text-xl">/ 100</span>
+                    </div>
+                </div>
+
+                <button 
+                    id="check-another-button" 
+                    onclick="resetApp()"
+                    class="mt-10 w-full px-6 py-4 bg-slate-600 hover:bg-slate-500 text-lg text-white font-bold rounded-xl transition duration-300 focus-ring transform hover:translate-y-[-2px] shadow-md"
+                >
+                    Check Another Site
+                </button>
             </div>
-            </section>
+        </div>
     </main>
-
-    <div id="contactModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close-btn" data-modal-target="contactModal">&times;</button>
-            <div class="modal-header">
-                <h3>Get In Touch</h3>
-            </div>
-            <div class="modal-body">
-                <p>I'm always open to discussing new projects, collaboration opportunities, or general tech talk. Feel free to connect!</p>
-                <div class="social-links">
-                    <a href="mailto:your.email@example.com">
-                        <strong>Email:</strong> your.email@example.com (Replace this)
-                    </a>
-                    <a href="#" target="_blank">
-                        <strong>LinkedIn:</strong> /yourlinkedin (Replace this)
-                    </a>
-                    <a href="#" target="_blank">
-                        <strong>GitHub:</strong> /yourgithub (Replace this)
-                    </a>
-                    </div>
-            </div>
-        </div>
-    </div>
     
-    <div id="detailsModal" class="modal">
-        <div class="modal-content">
-            <button class="modal-close-btn" data-modal-target="detailsModal">&times;</button>
-            <div class="modal-header">
-                <h3 id="modalTitle">Project Title</h3>
+    <!-- Projects Showcase Section (New) -->
+    <div id="projects-showcase" class="w-full max-w-5xl mt-16 hidden transition-all duration-700 ease-out opacity-0">
+        <h3 class="text-3xl font-bold mb-8 text-primary-color text-center">Junaid's Other Projects</h3>
+        <div class="grid grid-cols-1 gap-8 md:grid-cols-2">
+            <!-- Project Card 1: PrepHub (Emerald Accent) -->
+            <div id="phub-card" class="project-card-v2">
+                <h4 class="text-xl font-bold text-white mb-2 flex items-center">
+                    <span class="mr-3 text-2xl text-emerald-400">📝</span> JunaidPrepHub
+                </h4>
+                <p class="text-slate-400 mb-6 text-sm">An online testing platform where students can practice tests and receive instant results for preparation and knowledge growth.</p>
+                <a href="https://junaidprephub.junaidprojects.site/" target="_blank" class="project-cta-v2">
+                    Explore Platform &rarr;
+                </a>
             </div>
-            <div class="modal-body">
-                <p id="modalDescription"></p>
-                <h4>Key Features:</h4>
-                <ul id="modalFeatures"></ul>
+            <!-- Project Card 2: TypeHub (Amber Accent) -->
+            <div id="thub-card" class="project-card-v2">
+                <h4 class="text-xl font-bold text-white mb-2 flex items-center">
+                    <span class="mr-3 text-2xl text-amber-400">⌨️</span> JunaidTypeHub
+                </h4>
+                <p class="text-slate-400 mb-6 text-sm">A dedicated tool for users to improve their typing skills through focused and interactive practice exercises.</p>
+                <a href="https://junaidtypehub.junaidprojects.site/" target="_blank" class="project-cta-v2">
+                    Start Typing &rarr;
+                </a>
+            </div>
+            <!-- Project Card 3: Personal Site (Indigo Accent) -->
+            <div id="psite-card" class="project-card-v2">
+                <h4 class="text-xl font-bold text-white mb-2 flex items-center">
+                    <span class="mr-3 text-2xl text-indigo-400">👨‍💻</span> Junaid Personal Site
+                </h4>
+                <p class="text-slate-400 mb-6 text-sm">The main hub to connect with Junaid Ameer and learn about his background, skills, and professional journey.</p>
+                <a href="https://junaidameer.online" target="_blank" class="project-cta-v2">
+                    View Resume/Portfolio &rarr;
+                </a>
+            </div>
+            <!-- Project Card 4: Creative Projects Hub (Sky Accent) -->
+            <div id="cproj-card" class="project-card-v2">
+                <h4 class="text-xl font-bold text-white mb-2 flex items-center">
+                    <span class="mr-3 text-2xl text-sky-400">💡</span> Junaid Creative Projects
+                </h4>
+                <p class="text-slate-400 mb-6 text-sm">An overview of other creative web development projects, tools, and simulations built by Junaid.</p>
+                <a href="https://junaidprojects.site" target="_blank" class="project-cta-v2">
+                    See Creative Tools &rarr;
+                </a>
             </div>
         </div>
     </div>
 
+    <!-- Footer / About Section - Relocated Projects Toggle Button -->
+    <footer class="w-full max-w-5xl mt-24 p-6 md:p-8 border-t border-slate-700 text-center text-slate-400 bg-slate-900/30 rounded-t-xl relative">
+        <!-- Explore Projects Button - Small and in the Corner (Relative to footer) -->
+        <button id="explore-projects-btn" onclick="toggleProjects()" class="text-red-500 font-bold hover:text-red-300 transition duration-300 px-3 py-1.5 text-sm border border-red-500 rounded-lg hover:bg-red-900/50">
+            Explore Projects &darr;
+        </button>
+
+        <div class="footer-content">
+            <h3 class="text-xl font-semibold mb-3 text-white mt-4 md:mt-0">About Trustlyzer</h3>
+            <p class="text-sm leading-relaxed">
+                Trustlyzer is a passion project by <strong class="text-primary-color font-bold">Junaid Ameer</strong>, demonstrating client-side cybersecurity awareness through advanced heuristic analysis. This tool is intended for educational purposes, highlighting how to identify common red flags in suspicious URLs and promoting a fearlessly secure browsing experience.
+            </p>
+            <p class="text-xs mt-6 opacity-70">&copy; 2025 Trustlyzer by Junaid. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script>
-        // --- 1. PROJECT DATA ---
-        const projectData = {
-            trustlyzer: {
-                title: "Trustlyzer",
-                description: "Trustlyzer is built with a focus on user safety in the digital space. As a cybersecurity student, I recognize the growing threat of phishing and malicious sites. This tool leverages multiple API checks (e.g., Google Safe Browsing, proprietary heuristic analysis) to provide an immediate safety rating for any given URL.",
-                features: [
-                    "Real-time URL Safety Check",
-                    "Phishing and Malware Detection",
-                    "Intuitive Traffic Light Rating System (Safe/Suspicious/Dangerous)",
-                    "Minimalist, fast-loading user interface."
-                ]
-            },
-            typerush: {
-                title: "TypeRush",
-                description: "TypeRush is a web-based platform designed to make typing practice engaging and measurable. It helps users transition from slow, inaccurate typing to a high-speed, fluent flow, essential for any modern tech professional.",
-                features: [
-                    "WPM and Accuracy Tracking",
-                    "Custom Text Input for Practice",
-                    "Detailed Session Statistics and Progress Reports",
-                    "Clean, distraction-free 'Zen Mode' design."
-                ]
+        // Global state and configuration
+        const urlInput = document.getElementById('url-input');
+        const scanButton = document.getElementById('scan-button');
+        const errorMessage = document.getElementById('error-message');
+        const inputSection = document.getElementById('input-section');
+        const resultSection = document.getElementById('result-section');
+        const resultCard = document.getElementById('result-card');
+        const resultIcon = document.getElementById('result-icon');
+        const resultMainText = document.getElementById('result-main-text');
+        const scannedUrlDisplay = document.getElementById('scanned-url');
+        const analysisList = document.getElementById('analysis-list');
+        const scanTime = document.getElementById('scan-time');
+        const privacyScore = document.getElementById('privacy-score');
+        const inputGroupWrapper = document.getElementById('input-group-wrapper'); 
+        const projectsShowcase = document.getElementById('projects-showcase');
+        const projectsBtn = document.getElementById('explore-projects-btn');
+
+        // --- Event Listeners for Input Bar Focus Glow ---
+        urlInput.addEventListener('focus', () => {
+            inputGroupWrapper.classList.add('input-focus-glow');
+        });
+        urlInput.addEventListener('blur', () => {
+            inputGroupWrapper.classList.remove('input-focus-glow');
+        });
+        
+        // --- Core Simulation Logic ---
+
+        /**
+         * Heuristically analyzes a URL for common phishing and unsafe indicators.
+         * @param {string} url - The URL string to check.
+         * @returns {object} A result object containing status, color, icon, and analysis details.
+         */
+        function checkUrlSafety(url) {
+            const result = {
+                status: 'SAFE', // SAFE, SUSPICIOUS, UNSAFE
+                color: 'var(--safe-color)',
+                bgColor: 'var(--safe-bg)',
+                icon: '✅',
+                message: 'This site looks safe!',
+                analysis: [],
+                score: 100 // Starts at 100, deductions for issues
+            };
+            
+            let isSuspicious = false;
+            let isUnsafe = false;
+            const deductionMap = {
+                'https_warning': 20,
+                'long_url': 10,
+                'suspicious_tld': 30,
+                'ip_address': 40,
+                'subdomain_abuse': 15,
+                'common_phishing_word': 25,
+                'typosquatting': 35, 
+                'new_domain': 25,     
+                'long_redirect_path': 10,
+                'geo_ip_risk': 20 
+            };
+
+            // 1. HTTPS Check (Mandatory Security Protocol)
+            if (!url.startsWith('https://')) {
+                result.analysis.push({
+                    text: '⚠️ HTTPS NOT FOUND: The site does not use HTTPS. Data transmitted to this site may not be encrypted.',
+                    type: 'warning'
+                });
+                result.score -= deductionMap.https_warning;
+                isSuspicious = true;
+            } else {
+                result.analysis.push({
+                    text: '✅ Uses HTTPS: All data transmission is encrypted and secure.',
+                    type: 'safe'
+                });
             }
-        };
 
-        // --- 2. MODAL FUNCTIONS ---
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('is-active');
+            // Clean up URL for deeper analysis
+            let cleanUrl, cleanDomain;
+            try {
+                const urlObj = new URL(url.startsWith('http') ? url : 'https://' + url); 
+                cleanUrl = urlObj.hostname + urlObj.pathname + urlObj.search;
+                cleanDomain = urlObj.hostname.split('.').slice(-2, -1)[0]; 
+            } catch (e) {
+                // Fallback for simple string manipulation if URL is malformed
+                cleanUrl = url.replace(/^(https?:\/\/)?(www\.)?/, '');
+                cleanDomain = cleanUrl.split('/')[0].split('.').slice(-2, -1)[0] || '';
+            }
+            
+            // --- Heuristic Checks Start ---
+
+            // 2. Length Check (Phishing sites often use long, complex URLs)
+            if (url.length > 80) {
+                result.analysis.push({
+                    text: '⚠️ URL is very long (over 80 characters), which is sometimes used to hide malicious domains.',
+                    type: 'warning'
+                });
+                result.score -= deductionMap.long_url;
+                isSuspicious = true;
+            }
+
+            // 3. Suspicious Top-Level Domains (TLDs) Check
+            const suspiciousTlds = ['.zip', '.xyz', '.site', '.top', '.live', '.online', '.cn', '.tk'];
+            if (suspiciousTlds.some(tld => cleanUrl.toLowerCase().includes(tld))) {
+                result.analysis.push({
+                    text: '🚨 Suspicious TLD Detected: The domain uses a TLD commonly associated with scams.',
+                    type: 'unsafe'
+                });
+                result.score -= deductionMap.suspicious_tld;
+                isUnsafe = true;
+            }
+
+            // 4. IP Address in Domain Check (Legitimate sites rarely use raw IPs)
+            const ipRegex = /\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b/;
+            if (ipRegex.test(cleanUrl.split('/')[0])) {
+                result.analysis.push({
+                    text: '🚨 IP Address Used: The site uses a raw IP address instead of a domain name, a sign of low effort or malicious intent.',
+                    type: 'unsafe'
+                });
+                result.score -= deductionMap.ip_address;
+                isUnsafe = true;
+            }
+
+            // 5. Subdomain Abuse (e.g., login.google.com.phishingdomain.com)
+            const parts = cleanUrl.split('/')[0].split('.');
+            if (parts.length > 4) {
+                result.analysis.push({
+                    text: '⚠️ Excessive Subdomains: Too many subdomains might be an attempt to mask the true root domain.',
+                    type: 'warning'
+                });
+                result.score -= deductionMap.subdomain_abuse;
+                isSuspicious = true;
+            }
+
+            // 6. Common Phishing Keywords (e.g., login, secure, update, banking)
+            const phishingKeywords = ['login', 'secure', 'update', 'verify', 'bank', 'account', 'paypal', 'apple'];
+            if (phishingKeywords.some(keyword => cleanUrl.toLowerCase().includes(keyword))) {
+                 result.analysis.push({
+                    text: '⚠️ Keyword Alert: URL contains keywords often used in phishing attempts (e.g., "login," "secure").',
+                    type: 'warning'
+                });
+                result.score -= deductionMap.common_phishing_word;
+                isSuspicious = true;
+            }
+            
+            // 7. Typosquatting/Homoglyph Check (Simulated)
+            const brandNames = ['google', 'amazon', 'facebook', 'microsoft', 'apple'];
+            const lowerCleanDomain = cleanDomain.toLowerCase();
+            if (brandNames.some(brand => lowerCleanDomain.includes(brand.replace('o', '0')) || lowerCleanDomain.includes(brand.replace('l', '1')))) {
+                result.analysis.push({
+                    text: '🚨 Typosquatting Risk: Domain mimics a major brand name using substitution (e.g., "0" for "o"). High phishing risk.',
+                    type: 'unsafe'
+                });
+                result.score -= deductionMap.typosquatting;
+                isUnsafe = true;
+            }
+
+            // 8. Domain Age (Simulated: New domains are higher risk)
+            if (lowerCleanDomain.includes('new') || lowerCleanDomain.includes('free') || lowerCleanDomain.includes('trial')) {
+                 result.analysis.push({
+                    text: '⚠️ Domain Age Check: Domain name suggests it may be very new, which is a common pattern for temporary scam sites (simulated).',
+                    type: 'warning'
+                });
+                result.score -= deductionMap.new_domain;
+                isSuspicious = true;
+            }
+
+            // 9. Excessive Path/Query Length (Simulated Redirection/Deep Linking abuse)
+            const pathAndQuery = url.substring(url.indexOf(cleanUrl) + cleanUrl.length);
+            if (pathAndQuery.length > 100) {
+                result.analysis.push({
+                    text: '⚠️ Excessive Path: The URL contains a very long path or complex query parameters, potentially masking redirects.',
+                    type: 'warning'
+                });
+                result.score -= deductionMap.long_redirect_path;
+                isSuspicious = true;
+            }
+            
+            // 10. Simulated Geo-IP/ccTLD Risk Check
+            const suspiciousCcTlds = ['cn', 'ru', 'br', 'ph', 'in']; 
+            const hostname = new URL(url.startsWith('http') ? url : 'https://' + url).hostname;
+            const tld = hostname.split('.').pop().toLowerCase();
+
+            if (suspiciousCcTlds.includes(tld) && brandNames.some(brand => hostname.includes(brand) && !hostname.endsWith(brand + '.' + tld))) {
+                result.analysis.push({
+                    text: `⚠️ Geo-IP Risk: The site uses a country code TLD (.${tld}) and appears to mimic a global brand, often used in regional phishing scams.`,
+                    type: 'warning'
+                });
+                result.score -= deductionMap.geo_ip_risk;
+                isSuspicious = true;
+            } else if (suspiciousCcTlds.includes(tld)) {
+                 result.analysis.push({
+                    text: `🛡️ Country-Specific TLD: Site uses a country code TLD (.${tld}). This is not inherently unsafe, but verify the site's intended origin.`,
+                    type: 'safe'
+                });
+            }
+
+
+            // Final Status Determination
+            if (isUnsafe) {
+                result.status = 'UNSAFE';
+                result.message = 'Warning! Unsafe or phishing website detected.';
+                result.icon = '🚨';
+                result.color = 'var(--unsafe-color)';
+                result.bgColor = 'var(--unsafe-bg)';
+            } else if (isSuspicious && !isUnsafe) {
+                result.status = 'SUSPICIOUS';
+                result.message = 'This site is suspicious.';
+                result.icon = '⚠️';
+                result.color = 'var(--warning-color)';
+                result.bgColor = 'var(--warning-bg)';
+            } else {
+                result.analysis.push({
+                    text: '✅ Domain Structure: The URL structure appears clean and legitimate.',
+                    type: 'safe'
+                });
+                // Ensure the score is capped at 100
+                result.score = Math.min(100, Math.max(70, result.score)); 
+            }
+            
+            // Add final summary to analysis
+            result.analysis.push({
+                text: `🛡️ Simulated API Check: ${isUnsafe ? 'High Risk Match Found (PhishTank/Safe Browsing Emulation).' : isSuspicious ? 'Low Risk Match Found (Heuristic Flag).' : 'No Threat Match Found (Clear).'}.`,
+                type: isUnsafe ? 'unsafe' : isSuspicious ? 'warning' : 'safe'
+            });
+
+            // Ensure score doesn't go below 0
+            result.score = Math.max(0, Math.round(result.score));
+
+            return result;
         }
 
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('is-active');
+        /**
+         * Simulates an asynchronous API call to a cybersecurity service.
+         * Uses setTimeout to simulate network latency.
+         * @param {string} url The URL to check.
+         * @returns {Promise<object>} A promise that resolves with the safety check result.
+         */
+        function simulateSafeBrowsing(url) {
+            return new Promise((resolve) => {
+                // Simulate network latency (1.5 - 2.5 seconds)
+                const latency = Math.floor(Math.random() * 1000) + 1500;
+                setTimeout(() => {
+                    const result = checkUrlSafety(url);
+                    resolve(result);
+                }, latency);
+            });
         }
 
-        // Close all modals when the close button or background is clicked
-        document.querySelectorAll('.modal-close-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const modalId = e.target.getAttribute('data-modal-target');
-                if (modalId) {
-                    closeModal(modalId);
+        // --- UI and App Flow Logic ---
+
+        function displayResult(result, scannedUrl) {
+            // Update the card's background color and glow effect
+            // Apply status classes directly for dynamic background color and border from CSS
+            resultCard.className = `p-8 md:p-12 rounded-2xl transition-all duration-500 result-card-glow ${result.status.toLowerCase()}`;
+
+            // Update main text and icon
+            resultIcon.textContent = result.icon;
+            // Add/remove animate-bounce based on status
+            if (result.status !== 'SAFE') {
+                resultIcon.classList.add('animate-bounce');
+            } else {
+                resultIcon.classList.remove('animate-bounce');
+            }
+
+            resultMainText.textContent = result.message;
+            resultMainText.style.color = result.color;
+            scannedUrlDisplay.textContent = scannedUrl;
+
+            // Update analysis details
+            analysisList.innerHTML = '';
+            result.analysis.forEach(item => {
+                const li = document.createElement('li');
+                let colorClass;
+                // Determine color based on the item type for better visual feedback
+                if (item.type === 'safe') {
+                    colorClass = 'text-emerald-300';
+                } else if (item.type === 'warning') {
+                    colorClass = 'text-amber-300';
                 } else {
-                    // Fallback for contact modal
-                    closeModal('contactModal');
-                    closeModal('detailsModal');
+                    colorClass = 'text-red-300 font-semibold';
                 }
-            });
-        });
-
-        document.querySelectorAll('.modal').forEach(modal => {
-             modal.addEventListener('click', (e) => {
-                if (e.target === modal) {
-                    modal.classList.remove('is-active');
-                }
-            });
-        });
-
-        // --- 3. CONTACT ME FUNCTIONALITY ---
-        document.getElementById('contactMeBtn').addEventListener('click', () => {
-            openModal('contactModal');
-        });
-
-        // --- 4. VIEW DETAILS FUNCTIONALITY ---
-        document.querySelectorAll('.view-details-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const projectKey = e.target.getAttribute('data-project');
-                const project = projectData[projectKey];
-
-                if (project) {
-                    // Populate the details modal
-                    document.getElementById('modalTitle').textContent = project.title;
-                    document.getElementById('modalDescription').textContent = project.description;
-
-                    const featuresList = document.getElementById('modalFeatures');
-                    featuresList.innerHTML = ''; // Clear previous features
-                    project.features.forEach(feature => {
-                        const li = document.createElement('li');
-                        li.textContent = feature;
-                        featuresList.appendChild(li);
-                    });
-
-                    openModal('detailsModal');
-                }
-            });
-        });
-
-        // --- 5. VISIT SITE CONFIRMATION POPUP ---
-        document.querySelectorAll('.visit-site-btn').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const siteUrl = e.target.getAttribute('data-url');
                 
-                // Native JavaScript confirmation popup
-                const confirmed = confirm(
-                    "Do you want to visit this platform created by Junaid Ameer? Click OK to continue."
-                );
+                // Use a check/warning/alert icon based on the type
+                const itemIcon = item.type === 'safe' ? 
+                                    '<span class="text-emerald-400 mr-3 text-lg">✓</span>' : 
+                                    item.type === 'warning' ? 
+                                    '<span class="text-amber-400 mr-3 text-lg">!</span>' : 
+                                    '<span class="text-red-400 mr-3 text-lg">✗</span>';
 
-                if (confirmed) {
-                    // Prepend "https://" to ensure it opens correctly as a URL
-                    window.open(`https://${siteUrl}`, '_blank');
-                }
+                li.className = `${colorClass} flex items-start`;
+                li.innerHTML = `${itemIcon} <span>${item.text}</span>`;
+                analysisList.appendChild(li);
             });
+
+            // Update optional features
+            scanTime.textContent = new Date().toLocaleTimeString();
+            
+            // Display score with color coding
+            privacyScore.textContent = result.score;
+            privacyScore.className = `font-extrabold transition-colors duration-500 ${result.score >= 80 ? 'text-green-400' : result.score >= 50 ? 'text-amber-400' : 'text-red-400'}`;
+            
+            // Hide input, show results with smooth fade-in
+            inputSection.classList.add('hidden');
+            resultSection.classList.remove('hidden');
+            
+            // Force reflow to allow transition
+            void resultSection.offsetWidth; 
+            resultSection.style.opacity = '1';
+
+            resultSection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function toggleLoading(isLoading) {
+            const spinnerEl = document.getElementById('spinner');
+            const scanTextEl = document.getElementById('scan-text');
+
+            scanButton.disabled = isLoading;
+            if (isLoading) {
+                scanButton.classList.add('loading');
+                errorMessage.classList.add('hidden');
+                scanTextEl.textContent = 'Scanning...';
+                spinnerEl.style.display = 'block';
+            } else {
+                scanButton.classList.remove('loading');
+                scanTextEl.textContent = 'Scan Site';
+                spinnerEl.style.display = 'none';
+            }
+        }
+
+        function validateAndSanitizeUrl(url) {
+            if (!url) {
+                throw new Error("Please enter a URL to scan.");
+            }
+
+            // Simple check to ensure it looks like a URL
+            if (!url.includes('.')) {
+                throw new Error("Invalid URL format. Check the domain name or path.");
+            }
+
+            // Prepend protocol if missing for consistent checking
+            if (!url.startsWith('http://') && !url.startsWith('https://')) {
+                // Return HTTPS by default for better user guidance, but the checkUrlSafety function will still flag it if it remains HTTP.
+                return 'https://' + url; 
+            }
+            return url;
+        }
+
+        async function scanWebsite(event) {
+            event.preventDefault();
+            const rawUrl = urlInput.value.trim();
+
+            try {
+                // 1. Validation and Sanitization
+                const scannedUrl = validateAndSanitizeUrl(rawUrl);
+                
+                toggleLoading(true);
+
+                // 2. Perform Simulated API Call
+                const result = await simulateSafeBrowsing(scannedUrl);
+                
+                // 3. Display Results
+                displayResult(result, scannedUrl);
+
+            } catch (error) {
+                console.error("Scan Error:", error);
+                errorMessage.textContent = `Error: ${error.message}`;
+                errorMessage.classList.remove('hidden');
+            } finally {
+                toggleLoading(false);
+            }
+        }
+
+        function resetApp() {
+            // Clear previous results and error messages
+            errorMessage.classList.add('hidden');
+            // Reset result card classes to default, clearing status-specific styles
+            resultCard.className = 'p-8 md:p-12 rounded-2xl transition-all duration-500 result-card-glow'; 
+            resultCard.style.backgroundColor = 'var(--card-bg)'; // Explicitly set default background
+            resultSection.style.opacity = '0'; // Start fade out
+
+            // Hide result section and show input section after a brief delay
+            setTimeout(() => {
+                resultSection.classList.add('hidden');
+                inputSection.classList.remove('hidden');
+                inputSection.scrollIntoView({ behavior: 'smooth' });
+                 // Ensure the icon animation is removed when resetting
+                resultIcon.classList.remove('animate-bounce'); 
+            }, 500); // 500ms delay to allow fade transition
+            
+            // Optional: Clear the input field
+            // urlInput.value = '';
+        }
+
+        // --- New Function to Toggle Projects Showcase ---
+        function toggleProjects() {
+            if (projectsShowcase.classList.contains('hidden')) {
+                // Show the section
+                projectsShowcase.classList.remove('hidden');
+                
+                // Force reflow for transition
+                void projectsShowcase.offsetWidth; 
+                projectsShowcase.style.opacity = '1';
+
+                // Update button text
+                projectsBtn.innerHTML = 'Collapse Projects &uarr;';
+
+                // Scroll down to the new section smoothly
+                projectsShowcase.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                // Hide the section
+                projectsShowcase.style.opacity = '0';
+                
+                // Wait for fade transition before hiding completely
+                setTimeout(() => {
+                    projectsShowcase.classList.add('hidden');
+                    // Update button text
+                    projectsBtn.innerHTML = 'Explore Projects &darr;';
+                }, 700); // Matches the duration-700 transition
+            }
+        }
+        // --- End New Function ---
+
+
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            // Ensure the result section is hidden and opaque on initial load
+            resultSection.classList.add('hidden');
+            resultSection.style.opacity = '0'; 
+            // Ensure projects are hidden on load
+            projectsShowcase.classList.add('hidden');
+            projectsShowcase.style.opacity = '0';
         });
 
     </script>
