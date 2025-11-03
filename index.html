@@ -3,22 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trustlyzer by Junaid | Browse Fearlessly. Stay Secure.</title>
+    <title>Trustlyzer by Junaid | Final Security Protocol.</title>
     <!-- Load Tailwind CSS for modern, responsive, dark-themed styling --><script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* --- CSS VARIABLES & BASE STYLES --- */
         :root {
-            --bg-deep: #060914; /* Deep, rich navy for background (Same as Portfolio) */
-            --card-bg: #111827; /* Slate 900 for card */
+            --bg-deep: #060914; 
+            --card-bg: #111827; 
             --text-light: #f8fafc;
-            --primary-color: #4f46e5; /* Stronger Indigo 600 */
-            --accent-aqua: #00e5ff; /* Aqua for Cyber Glow (Used for button glow) */
-            --safe-color: #10b981; /* Emerald 500 */
-            --warning-color: #f59e0b; /* Amber 500 */
-            --unsafe-color: #ef4444; /* Red 500 */
-            --safe-bg: #064e3b; /* Deep green for safe card bg */
-            --warning-bg: #78350f; /* Deep orange for warning card bg */
-            --unsafe-bg: #7f1d1d; /* Deep red for unsafe card bg */
+            --primary-color: #4f46e5; 
+            --accent-aqua: #00e5ff; 
+            --safe-color: #10b981; 
+            --warning-color: #f59e0b; 
+            --unsafe-color: #ef4444; 
+            --safe-bg: #064e3b; 
+            --warning-bg: #78350f; 
+            --unsafe-bg: #7f1d1d; 
         }
 
         body {
@@ -26,61 +26,54 @@
             background-color: var(--bg-deep);
             color: var(--text-light);
             transition: all 0.5s ease;
-            /* Deeper, more interesting radial gradient */
             background-image: radial-gradient(at 0% 0%, #0d1222 0%, #172554 100%);
             background-attachment: fixed;
         }
 
-        /* Improved Header Branding */
         .brand-name {
-            font-size: 2.75rem; /* Slightly larger */
-            font-weight: 900; /* Even bolder */
-            letter-spacing: -0.06em; /* Tighter for impact */
+            font-size: 2.75rem; 
+            font-weight: 900; 
+            letter-spacing: -0.06em; 
             color: #ffffff;
-            text-shadow: 0 0 15px rgba(79, 70, 229, 0.6); /* More prominent glow */
+            text-shadow: 0 0 15px rgba(79, 70, 229, 0.6); 
         }
         
-        /* New Custom CSS for the Input Bar Focus Glow */
         #input-group-wrapper {
             transition: all 0.3s ease-in-out;
-            border: 2px solid transparent; /* Start with a subtle border */
-            border-radius: 1.25rem; /* Match input's rounded-xl */
+            border: 2px solid transparent; 
+            border-radius: 1.25rem; 
         }
 
         .input-focus-glow {
-            /* Futuristic purple/blue outer glow on focus */
             box-shadow: 0 0 20px rgba(79, 70, 229, 0.7), 0 0 40px rgba(79, 70, 229, 0.4);
             border-color: var(--primary-color) !important;
         }
 
-        /* Specific Input Field Styling for depth */
         #url-input {
-            box-shadow: inset 0 5px 8px rgba(0, 0, 0, 0.5); /* Deeper inner shadow */
+            box-shadow: inset 0 5px 8px rgba(0, 0, 0, 0.5); 
             transition: box-shadow 0.3s ease, border-color 0.3s ease;
-            border-color: #334155; /* Slate-700 equivalent */
+            border-color: #334155; 
         }
         #url-input:focus {
-             border-color: var(--primary-color); /* Highlight border on input focus */
+             border-color: var(--primary-color); 
         }
 
-        /* --- Scan Button Polishing Styles --- */
         #scan-button {
-            border: 3px solid #6366f1; /* Vibrant Indigo 500 for border */
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.6); /* Primary color outer glow */
+            border: 3px solid #6366f1; 
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.6); 
             transition: all 0.3s ease;
         }
         #scan-button:hover {
             box-shadow: 0 6px 20px rgba(79, 70, 229, 0.8), inset 0 0 10px rgba(255, 255, 255, 0.2);
         }
         
-        /* --- Project Card CTA Button Styling --- */
         .project-cta {
             display: inline-block;
             padding: 0.5rem 1rem;
             margin-top: 0.5rem;
             font-weight: 700;
-            font-size: 0.875rem; /* text-sm */
-            border-radius: 0.5rem; /* rounded-lg */
+            font-size: 0.875rem; 
+            border-radius: 0.5rem; 
             border: 2px solid var(--primary-color);
             color: var(--primary-color);
             background-color: transparent;
@@ -93,7 +86,6 @@
             box-shadow: 0 0 15px rgba(79, 70, 229, 0.8);
             transform: translateY(-1px);
         }
-        /* --- END NEW STYLES --- */
 
         /* Loading spinner animation */
         .spinner {
@@ -121,14 +113,14 @@
 
         /* Custom glow effect for the result card */
         .result-card-glow {
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); /* Stronger general shadow */
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5); 
             transition: box-shadow 0.6s ease-in-out, background-color 0.6s ease;
         }
 
         /* Specific glow styles based on result state */
-        .safe { box-shadow: 0 0 60px rgba(16, 185, 129, 0.8), inset 0 0 20px rgba(16, 185, 129, 0.3); background-color: rgba(6, 78, 59, 0.7); border: 1px solid var(--safe-color); } /* Emerald glow */
-        .suspicious { box-shadow: 0 0 60px rgba(245, 158, 11, 0.8), inset 0 0 20px rgba(245, 158, 11, 0.3); background-color: rgba(120, 53, 15, 0.7); border: 1px solid var(--warning-color); } /* Amber glow */
-        .unsafe { box-shadow: 0 0 60px rgba(239, 68, 68, 0.8), inset 0 0 20px rgba(239, 68, 68, 0.3); background-color: rgba(127, 29, 29, 0.7); border: 1px solid var(--unsafe-color); } /* Red glow */
+        .safe { box-shadow: 0 0 60px rgba(16, 185, 129, 0.8), inset 0 0 20px rgba(16, 185, 129, 0.3); background-color: rgba(6, 78, 59, 0.7); border: 1px solid var(--safe-color); } 
+        .suspicious { box-shadow: 0 0 60px rgba(245, 158, 11, 0.8), inset 0 0 20px rgba(245, 158, 11, 0.3); background-color: rgba(120, 53, 15, 0.7); border: 1px solid var(--warning-color); } 
+        .unsafe { box-shadow: 0 0 60px rgba(239, 68, 68, 0.8), inset 0 0 20px rgba(239, 68, 68, 0.3); background-color: rgba(127, 29, 29, 0.7); border: 1px solid var(--unsafe-color); } 
 
         /* Animation for result icon */
         .animate-bounce {
@@ -139,16 +131,14 @@
             100% { transform: translateY(-10px); }
         }
 
-        /* Responsive adjustments for footer for better spacing on small screens */
         @media (max-width: 768px) {
             .brand-name {
-                font-size: 2rem; /* Slightly smaller on mobile */
+                font-size: 2rem; 
             }
             .brand-name .ml-4 {
-                margin-left: 0.75rem; /* Reduce margin */
-                padding-left: 0.75rem; /* Reduce padding */
+                margin-left: 0.75rem; 
+                padding-left: 0.75rem; 
             }
-            /* Adjust the footer button position for mobile (keep it centered above text) */
             .footer-content {
                 flex-direction: column;
                 align-items: center;
@@ -159,7 +149,6 @@
             }
         }
         @media (min-width: 768px) {
-            /* Desktop button positioning */
             #explore-projects-btn {
                 position: absolute;
                 top: 1rem;
@@ -167,7 +156,7 @@
             }
         }
         
-        /* New Project Card Styles for distinction */
+        /* Project Card Styles */
         .project-card-v2 {
             background-color: var(--card-bg);
             border-radius: 1rem;
@@ -196,7 +185,7 @@
             color: white;
             transform: translateY(-1px);
         }
-        /* Specific project styles */
+
         #phub-card { border-left-color: #10b981; }
         #thub-card { border-left-color: #f59e0b; }
         #psite-card { border-left-color: #6366f1; }
@@ -258,17 +247,17 @@
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                How the Scan Works (Simulated Heuristics)
+                How the Scan Works (Max-Level Heuristic Analysis)
             </h3>
             <p class="text-slate-400 text-sm leading-relaxed">
-                Trustlyzer analyzes multiple technical indicators (heuristics) to calculate a risk score, mimicking commercial services. We check for <strong>HTTPS presence</strong>, <strong>suspicious Top-Level Domains (TLDs)</strong>, <strong>potential Typosquatting</strong>, <strong>Domain Age</strong>, and <strong>Simulated Geo-IP Location</strong> to provide an immediate security assessment. This approach helps identify patterns common in phishing and scam attempts.
+                This tool uses advanced heuristics, analyzing Domain Randomness (Entropy), Phishing Keywords (in the full URL and path), TLD risk, and URL complexity. This is the most accurate real-time analysis possible without accessing a server-side global threat database. Always use common sense alongside this report.
             </p>
         </div>
 
         <!-- Result Section (Initially Hidden) - Polished Appearance --><div id="result-section" class="mt-16 hidden transition-all duration-700 ease-out opacity-0">
             <div id="result-card" class="result-card-glow p-8 md:p-12 rounded-2xl transition-all duration-500">
                 <div class="flex items-center mb-8">
-                    <span id="result-icon" class="text-6xl mr-6"></span> <!-- Icon animation handled by JS/CSS --><div>
+                    <span id="result-icon" class="text-6xl mr-6"></span> <div>
                         <p class="text-xl font-medium text-slate-300">Scan Status:</p>
                         <h3 id="result-main-text" class="text-4xl font-extrabold"></h3>
                     </div>
@@ -362,7 +351,7 @@
         <div class="footer-content">
             <h3 class="text-xl font-semibold mb-3 text-white mt-4 md:mt-0">About Trustlyzer</h3>
             <p class="text-sm leading-relaxed">
-                Trustlyzer is a passion project by <strong class="text-primary-color font-bold">Junaid Ameer</strong>, demonstrating client-side cybersecurity awareness through advanced heuristic analysis. This tool is intended for educational purposes, highlighting how to identify common red flags in suspicious URLs and promoting a fearlessly secure browsing experience.
+                Trustlyzer is a passion project by <strong class="text-primary-color font-bold">Junaid Ameer</strong>, demonstrating the limits and power of advanced client-side security heuristics. It promotes a fearless and secure browsing experience.
             </p>
             <p class="text-xs mt-6 opacity-70">&copy; 2025 Trustlyzer by Junaid. All rights reserved.</p>
         </div>
@@ -386,6 +375,18 @@
         const projectsShowcase = document.getElementById('projects-showcase');
         const projectsBtn = document.getElementById('explore-projects-btn');
 
+        // --- KNOWN MALICIOUS DOMAINS FOR REALISTIC DETECTION (SIMULATED BLACKLIST) ---
+        const knownUnsafeDomains = [
+            'scam-site-test.com', 
+            'fake-crypto-exchange.xyz', 
+            'free-money-login.site',
+            'paypal-security-update.online',
+            'google-verifly.top', 
+            'gambling-fraud.live',
+            'login.phishingdomain.cn'
+        ];
+        // --------------------------------------------------------------------------
+
         // --- Event Listeners for Input Bar Focus Glow ---
         urlInput.addEventListener('focus', () => {
             inputGroupWrapper.classList.add('input-focus-glow');
@@ -394,12 +395,25 @@
             inputGroupWrapper.classList.remove('input-focus-glow');
         });
         
-        // --- Core Simulation Logic ---
+        /**
+         * Calculates Shannon entropy for a string (measures randomness).
+         */
+        function calculateEntropy(str) {
+            const charCounts = {};
+            for (const char of str) {
+                charCounts[char] = (charCounts[char] || 0) + 1;
+            }
+            let entropy = 0;
+            const totalChars = str.length;
+            for (const char in charCounts) {
+                const probability = charCounts[char] / totalChars;
+                entropy -= probability * Math.log2(probability);
+            }
+            return entropy;
+        }
 
         /**
          * Heuristically analyzes a URL for common phishing and unsafe indicators.
-         * @param {string} url - The URL string to check.
-         * @returns {object} A result object containing status, color, icon, and analysis details.
          */
         function checkUrlSafety(url) {
             const result = {
@@ -409,204 +423,228 @@
                 icon: '✅',
                 message: 'This site looks safe!',
                 analysis: [],
-                score: 100 // Starts at 100, deductions for issues
+                score: 100 
             };
             
             let isSuspicious = false;
             let isUnsafe = false;
             const deductionMap = {
                 'https_warning': 20,
-                'long_url': 10,
-                'suspicious_tld': 30,
+                'suspicious_tld': 15,
                 'ip_address': 40,
                 'subdomain_abuse': 15,
-                'common_phishing_word': 25,
-                'typosquatting': 35, 
-                'new_domain': 25,     
-                'long_redirect_path': 10,
-                'geo_ip_risk': 20 
+                'common_phishing_word': 40,
+                'full_url_suspicion': 25,
+                'high_entropy': 20,         // Domain Randomness
+                'lifetime_promise': 30,     // High-value scam keywords
+                'excessive_length': 15,     // Overall length check
+                'long_redirect_path': 20,   // Redirect chain simulation
             };
 
-            // 1. HTTPS Check (Mandatory Security Protocol)
-            if (!url.startsWith('https://')) {
+            let hostname, rootDomain;
+            try {
+                const tempUrl = url.startsWith('http') ? url : 'https://' + url;
+                const urlObj = new URL(tempUrl); 
+                hostname = urlObj.hostname.toLowerCase();
+                const parts = hostname.split('.');
+                rootDomain = parts.slice(-2).join('.');
+                
+            } catch (e) {
+                result.status = 'UNSAFE';
+                result.message = '🚨 ERROR: Malformed URL/Input. Please ensure correct format.';
+                result.icon = '🛑';
+                result.color = 'var(--unsafe-color)';
+                result.bgColor = 'var(--unsafe-bg)';
+                result.analysis.push({ text: '🚨 Malformed URL: Cannot parse. High risk of intentional cloaking or invalid input.', type: 'unsafe' });
+                result.score = 0;
+                return result; 
+            }
+
+            // ====================================================================
+            // 1. BLACKLIST CHECK - Highest Priority
+            // ====================================================================
+            if (knownUnsafeDomains.some(domain => hostname.includes(domain))) {
                 result.analysis.push({
-                    text: '⚠️ HTTPS NOT FOUND: The site does not use HTTPS. Data transmitted to this site may not be encrypted.',
-                    type: 'warning'
+                    text: '🛑 DEFINITIVE THREAT: Domain is on a simulated list of known scam/phishing sites.',
+                    type: 'unsafe'
                 });
-                result.score -= deductionMap.https_warning;
-                isSuspicious = true;
+                isUnsafe = true;
+                result.score = 5; 
             } else {
                 result.analysis.push({
-                    text: '✅ Uses HTTPS: All data transmission is encrypted and secure.',
+                    text: '✅ Blacklist Status: No direct match found in the simulated blacklist.',
                     type: 'safe'
                 });
-            }
+                
+                // --- HEURISTIC CHECKS START (Only run if not definitively UNSAFE by blacklist) ---
 
-            // Clean up URL for deeper analysis
-            let cleanUrl, cleanDomain;
-            try {
-                const urlObj = new URL(url.startsWith('http') ? url : 'https://' + url); 
-                cleanUrl = urlObj.hostname + urlObj.pathname + urlObj.search;
-                cleanDomain = urlObj.hostname.split('.').slice(-2, -1)[0]; 
-            } catch (e) {
-                // Fallback for simple string manipulation if URL is malformed
-                cleanUrl = url.replace(/^(https?:\/\/)?(www\.)?/, '');
-                cleanDomain = cleanUrl.split('/')[0].split('.').slice(-2, -1)[0] || '';
-            }
-            
-            // --- Heuristic Checks Start ---
+                // 2. HTTPS Check 
+                if (!url.startsWith('https://')) {
+                    result.analysis.push({
+                        text: '⚠️ HTTPS NOT FOUND: The site does not use HTTPS. Data transmitted may not be encrypted.',
+                        type: 'warning'
+                    });
+                    result.score -= deductionMap.https_warning;
+                    isSuspicious = true;
+                } else {
+                    result.analysis.push({
+                        text: '✅ Uses HTTPS: All data transmission is encrypted and secure.',
+                        type: 'safe'
+                    });
+                }
 
-            // 2. Length Check (Phishing sites often use long, complex URLs)
-            if (url.length > 80) {
-                result.analysis.push({
-                    text: '⚠️ URL is very long (over 80 characters), which is sometimes used to hide malicious domains.',
-                    type: 'warning'
-                });
-                result.score -= deductionMap.long_url;
-                isSuspicious = true;
-            }
+                // 3. Suspicious TLDs Check 
+                const suspiciousTlds = ['.zip', '.xyz', '.site', '.top', '.live', '.cn', '.tk'];
+                const tld = rootDomain.split('.').pop();
+                
+                if (suspiciousTlds.includes('.' + tld) || (tld.length > 2 && tld !== 'com' && tld !== 'org' && tld !== 'net' && tld !== 'info')) {
+                    result.analysis.push({
+                        text: `⚠️ Suspicious TLD (.${tld}) Detected: TLD is commonly associated with lower-trust or new sites.`,
+                        type: 'warning'
+                    });
+                    result.score -= deductionMap.suspicious_tld;
+                    isSuspicious = true;
+                } else {
+                    result.analysis.push({
+                        text: '✅ Domain TLD: Uses a standard, lower-risk TLD.',
+                        type: 'safe'
+                    });
+                }
 
-            // 3. Suspicious Top-Level Domains (TLDs) Check
-            const suspiciousTlds = ['.zip', '.xyz', '.site', '.top', '.live', '.online', '.cn', '.tk'];
-            if (suspiciousTlds.some(tld => cleanUrl.toLowerCase().includes(tld))) {
-                result.analysis.push({
-                    text: '🚨 Suspicious TLD Detected: The domain uses a TLD commonly associated with scams.',
-                    type: 'unsafe'
-                });
-                result.score -= deductionMap.suspicious_tld;
-                isUnsafe = true;
-            }
+                // 4. IP Address in Domain Check
+                const ipRegex = /^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/;
+                if (ipRegex.test(hostname)) {
+                    result.analysis.push({
+                        text: '🚨 IP Address Used: The site uses a raw IP address, a strong indicator of low effort or malicious intent.',
+                        type: 'unsafe'
+                    });
+                    result.score -= deductionMap.ip_address;
+                    isUnsafe = true;
+                }
 
-            // 4. IP Address in Domain Check (Legitimate sites rarely use raw IPs)
-            const ipRegex = /\b(?:[0-9]{1,3}\.){3}[0-9]{1,3}\b/;
-            if (ipRegex.test(cleanUrl.split('/')[0])) {
-                result.analysis.push({
-                    text: '🚨 IP Address Used: The site uses a raw IP address instead of a domain name, a sign of low effort or malicious intent.',
-                    type: 'unsafe'
-                });
-                result.score -= deductionMap.ip_address;
-                isUnsafe = true;
-            }
+                // 5. Excessive Subdomains 
+                const parts = hostname.split('.');
+                if (parts.length > 4) {
+                    result.analysis.push({
+                        text: '⚠️ Excessive Subdomains: Too many subdomains might be an attempt to mask the true root domain.',
+                        type: 'warning'
+                    });
+                    result.score -= deductionMap.subdomain_abuse;
+                    isSuspicious = true;
+                }
 
-            // 5. Subdomain Abuse (e.g., login.google.com.phishingdomain.com)
-            const parts = cleanUrl.split('/')[0].split('.');
-            if (parts.length > 4) {
-                result.analysis.push({
-                    text: '⚠️ Excessive Subdomains: Too many subdomains might be an attempt to mask the true root domain.',
-                    type: 'warning'
-                });
-                result.score -= deductionMap.subdomain_abuse;
-                isSuspicious = true;
-            }
+                // 6. Domain Randomness (High Entropy Check)
+                const domainNamePart = rootDomain.split('.').slice(0, -1)[0];
+                const entropy = calculateEntropy(domainNamePart);
+                if (domainNamePart.length > 8 && entropy > 3.4) {
+                     result.analysis.push({
+                        text: '🚨 High Randomness Detected: Domain name appears highly random or machine-generated (High Entropy).',
+                        type: 'unsafe'
+                    });
+                    result.score -= deductionMap.high_entropy;
+                    isUnsafe = true;
+                }
 
-            // 6. Common Phishing Keywords (e.g., login, secure, update, banking)
-            const phishingKeywords = ['login', 'secure', 'update', 'verify', 'bank', 'account', 'paypal', 'apple'];
-            if (phishingKeywords.some(keyword => cleanUrl.toLowerCase().includes(keyword))) {
-                 result.analysis.push({
-                    text: '⚠️ Keyword Alert: URL contains keywords often used in phishing attempts (e.g., "login," "secure").',
-                    type: 'warning'
-                });
-                result.score -= deductionMap.common_phishing_word;
-                isSuspicious = true;
-            }
-            
-            // 7. Typosquatting/Homoglyph Check (Simulated)
-            const brandNames = ['google', 'amazon', 'facebook', 'microsoft', 'apple'];
-            const lowerCleanDomain = cleanDomain.toLowerCase();
-            if (brandNames.some(brand => lowerCleanDomain.includes(brand.replace('o', '0')) || lowerCleanDomain.includes(brand.replace('l', '1')))) {
-                result.analysis.push({
-                    text: '🚨 Typosquatting Risk: Domain mimics a major brand name using substitution (e.g., "0" for "o"). High phishing risk.',
-                    type: 'unsafe'
-                });
-                result.score -= deductionMap.typosquatting;
-                isUnsafe = true;
-            }
+                // 7. Overall Domain/Path Length Check
+                if (url.length > 100) {
+                     result.analysis.push({
+                        text: '⚠️ Excessive URL Length: URL is very long (over 100 characters), potentially to obscure the host or use aggressive tracking.',
+                        type: 'warning'
+                    });
+                    result.score -= deductionMap.excessive_length;
+                    isSuspicious = true;
+                }
+                
+                // 8. Simulated Excessive Path/Query Length (Redirect Abuse)
+                const pathAndQuery = url.substring(url.indexOf(hostname) + hostname.length);
+                if (pathAndQuery.length > 80 && pathAndQuery.includes('=')) {
+                    result.analysis.push({
+                        text: '⚠️ Deep Path / Aggressive Query: Very long path or complex query parameters (simulated redirect/tracking abuse).',
+                        type: 'warning'
+                    });
+                    result.score -= deductionMap.long_redirect_path;
+                    isSuspicious = true;
+                }
 
-            // 8. Domain Age (Simulated: New domains are higher risk)
-            if (lowerCleanDomain.includes('new') || lowerCleanDomain.includes('free') || lowerCleanDomain.includes('trial')) {
-                 result.analysis.push({
-                    text: '⚠️ Domain Age Check: Domain name suggests it may be very new, which is a common pattern for temporary scam sites (simulated).',
-                    type: 'warning'
-                });
-                result.score -= deductionMap.new_domain;
-                isSuspicious = true;
-            }
+                // 9. Common Phishing/Scam Keywords in the FULL URL (Domain + Path + Query)
+                const fullUrlLowerCase = url.toLowerCase();
+                const phishingKeywords = ['login', 'secure', 'verify', 'bank', 'account', 'paypal', 'apple', 'crypto', 'bonus', 'claim', 'transfer', 'update', 'payment', 'prize', 'refund'];
+                const lifetimePromiseKeywords = ['guaranteed-returns', 'instant-payout', 'get-rich-quick', 'dataentryjob', 'onlinejob', 'freemoney', 'workfromhome', 'gambling', 'casino']; // Added gambling/casino here
+                
+                let promiseMatch = lifetimePromiseKeywords.find(keyword => fullUrlLowerCase.includes(keyword.replace(/-/g, ''))); 
 
-            // 9. Excessive Path/Query Length (Simulated Redirection/Deep Linking abuse)
-            const pathAndQuery = url.substring(url.indexOf(cleanUrl) + cleanUrl.length);
-            if (pathAndQuery.length > 100) {
-                result.analysis.push({
-                    text: '⚠️ Excessive Path: The URL contains a very long path or complex query parameters, potentially masking redirects.',
-                    type: 'warning'
-                });
-                result.score -= deductionMap.long_redirect_path;
-                isSuspicious = true;
-            }
-            
-            // 10. Simulated Geo-IP/ccTLD Risk Check
-            const suspiciousCcTlds = ['cn', 'ru', 'br', 'ph', 'in']; 
-            const hostname = new URL(url.startsWith('http') ? url : 'https://' + url).hostname;
-            const tld = hostname.split('.').pop().toLowerCase();
+                if (promiseMatch) {
+                    result.analysis.push({
+                        text: `🚨 Scam Keyword Detected: Domain/Path includes high-risk terms like "${promiseMatch.replace(/-/g, ' ')}" (indicates low-effort scam/fraud).`,
+                        type: 'unsafe'
+                    });
+                    result.score -= deductionMap.lifetime_promise; 
+                    isUnsafe = true;
+                }
 
-            if (suspiciousCcTlds.includes(tld) && brandNames.some(brand => hostname.includes(brand) && !hostname.endsWith(brand + '.' + tld))) {
-                result.analysis.push({
-                    text: `⚠️ Geo-IP Risk: The site uses a country code TLD (.${tld}) and appears to mimic a global brand, often used in regional phishing scams.`,
-                    type: 'warning'
-                });
-                result.score -= deductionMap.geo_ip_risk;
-                isSuspicious = true;
-            } else if (suspiciousCcTlds.includes(tld)) {
-                 result.analysis.push({
-                    text: `🛡️ Country-Specific TLD: Site uses a country code TLD (.${tld}). This is not inherently unsafe, but verify the site's intended origin.`,
-                    type: 'safe'
-                });
+                let keywordMatch = phishingKeywords.find(keyword => fullUrlLowerCase.includes(keyword));
+
+                if (keywordMatch && !promiseMatch) { 
+                    if (rootDomain.includes(keywordMatch) || keywordMatch.includes('login') || keywordMatch.includes('bank')) {
+                        result.analysis.push({
+                             text: `🚨 Keyword Alert: High-risk keyword "${keywordMatch}" detected in the domain. HIGH PHISHING RISK.`,
+                             type: 'unsafe'
+                         });
+                         result.score -= deductionMap.common_phishing_word; 
+                         isUnsafe = true;
+                    } else {
+                         result.analysis.push({
+                             text: `⚠️ Keyword Alert: Suspicious word "${keywordMatch}" detected in the URL path/query.`,
+                             type: 'warning'
+                         });
+                         result.score -= deductionMap.full_url_suspicion; 
+                         isSuspicious = true;
+                    }
+                 } else if (!promiseMatch) {
+                    result.analysis.push({
+                        text: '✅ No High-Risk Keywords: The URL path and domain appear clean of common scam words.',
+                        type: 'safe'
+                    });
+                 }
             }
 
 
             // Final Status Determination
             if (isUnsafe) {
                 result.status = 'UNSAFE';
-                result.message = 'Warning! Unsafe or phishing website detected.';
-                result.icon = '🚨';
+                result.message = '🚨 DANGER! UNCONFIRMED OR PHISHING WEBSITE DETECTED.';
+                result.icon = '🛑';
                 result.color = 'var(--unsafe-color)';
                 result.bgColor = 'var(--unsafe-bg)';
-            } else if (isSuspicious && !isUnsafe) {
+            } else if (result.score <= 70 || isSuspicious) { 
                 result.status = 'SUSPICIOUS';
-                result.message = 'This site is suspicious.';
+                result.message = '⚠️ This site is suspicious. Proceed with EXTREME caution.';
                 result.icon = '⚠️';
                 result.color = 'var(--warning-color)';
                 result.bgColor = 'var(--warning-bg)';
             } else {
-                result.analysis.push({
-                    text: '✅ Domain Structure: The URL structure appears clean and legitimate.',
-                    type: 'safe'
-                });
-                // Ensure the score is capped at 100
-                result.score = Math.min(100, Math.max(70, result.score)); 
+                result.status = 'SAFE';
+                result.message = '✅ Site appears safe based on our analysis.';
+                result.icon = '✅';
+                result.color = 'var(--safe-color)';
+                result.bgColor = 'var(--safe-bg)';
             }
             
-            // Add final summary to analysis
             result.analysis.push({
-                text: `🛡️ Simulated API Check: ${isUnsafe ? 'High Risk Match Found (PhishTank/Safe Browsing Emulation).' : isSuspicious ? 'Low Risk Match Found (Heuristic Flag).' : 'No Threat Match Found (Clear).'}.`,
-                type: isUnsafe ? 'unsafe' : isSuspicious ? 'warning' : 'safe'
+                text: `🛡️ Overall Confidence Score: ${result.score}/100. Always check the full report.`,
+                type: result.status.toLowerCase()
             });
 
-            // Ensure score doesn't go below 0
             result.score = Math.max(0, Math.round(result.score));
 
             return result;
         }
 
-        /**
-         * Simulates an asynchronous API call to a cybersecurity service.
-         * Uses setTimeout to simulate network latency.
-         * @param {string} url The URL to check.
-         * @returns {Promise<object>} A promise that resolves with the safety check result.
-         */
+        // --- Helper and UI Functions (Optimized and Finalized) ---
+        
         function simulateSafeBrowsing(url) {
             return new Promise((resolve) => {
-                // Simulate network latency (1.5 - 2.5 seconds)
-                const latency = Math.floor(Math.random() * 1000) + 1500;
+                const latency = Math.floor(Math.random() * 500) + 500;
                 setTimeout(() => {
                     const result = checkUrlSafety(url);
                     resolve(result);
@@ -614,32 +652,21 @@
             });
         }
 
-        // --- UI and App Flow Logic ---
-
         function displayResult(result, scannedUrl) {
-            // Update the card's background color and glow effect
-            // Apply status classes directly for dynamic background color and border from CSS
             resultCard.className = `p-8 md:p-12 rounded-2xl transition-all duration-500 result-card-glow ${result.status.toLowerCase()}`;
-
-            // Update main text and icon
             resultIcon.textContent = result.icon;
-            // Add/remove animate-bounce based on status
             if (result.status !== 'SAFE') {
                 resultIcon.classList.add('animate-bounce');
             } else {
                 resultIcon.classList.remove('animate-bounce');
             }
-
             resultMainText.textContent = result.message;
             resultMainText.style.color = result.color;
             scannedUrlDisplay.textContent = scannedUrl;
-
-            // Update analysis details
             analysisList.innerHTML = '';
             result.analysis.forEach(item => {
                 const li = document.createElement('li');
                 let colorClass;
-                // Determine color based on the item type for better visual feedback
                 if (item.type === 'safe') {
                     colorClass = 'text-emerald-300';
                 } else if (item.type === 'warning') {
@@ -647,41 +674,28 @@
                 } else {
                     colorClass = 'text-red-300 font-semibold';
                 }
-                
-                // Use a check/warning/alert icon based on the type
                 const itemIcon = item.type === 'safe' ? 
-                                    '<span class="text-emerald-400 mr-3 text-lg">✓</span>' : 
-                                    item.type === 'warning' ? 
-                                    '<span class="text-amber-400 mr-3 text-lg">!</span>' : 
-                                    '<span class="text-red-400 mr-3 text-lg">✗</span>';
-
+                                        '<span class="text-emerald-400 mr-3 text-lg">✓</span>' : 
+                                        item.type === 'warning' ? 
+                                        '<span class="text-amber-400 mr-3 text-lg">!</span>' : 
+                                        '<span class="text-red-400 mr-3 text-lg">✗</span>';
                 li.className = `${colorClass} flex items-start`;
                 li.innerHTML = `${itemIcon} <span>${item.text}</span>`;
                 analysisList.appendChild(li);
             });
-
-            // Update optional features
             scanTime.textContent = new Date().toLocaleTimeString();
-            
-            // Display score with color coding
             privacyScore.textContent = result.score;
             privacyScore.className = `font-extrabold transition-colors duration-500 ${result.score >= 80 ? 'text-green-400' : result.score >= 50 ? 'text-amber-400' : 'text-red-400'}`;
-            
-            // Hide input, show results with smooth fade-in
             inputSection.classList.add('hidden');
             resultSection.classList.remove('hidden');
-            
-            // Force reflow to allow transition
             void resultSection.offsetWidth; 
             resultSection.style.opacity = '1';
-
             resultSection.scrollIntoView({ behavior: 'smooth' });
         }
 
         function toggleLoading(isLoading) {
             const spinnerEl = document.getElementById('spinner');
             const scanTextEl = document.getElementById('scan-text');
-
             scanButton.disabled = isLoading;
             if (isLoading) {
                 scanButton.classList.add('loading');
@@ -699,15 +713,10 @@
             if (!url) {
                 throw new Error("Please enter a URL to scan.");
             }
-
-            // Simple check to ensure it looks like a URL
             if (!url.includes('.')) {
                 throw new Error("Invalid URL format. Check the domain name or path.");
             }
-
-            // Prepend protocol if missing for consistent checking
             if (!url.startsWith('http://') && !url.startsWith('https://')) {
-                // Return HTTPS by default for better user guidance, but the checkUrlSafety function will still flag it if it remains HTTP.
                 return 'https://' + url; 
             }
             return url;
@@ -716,85 +725,53 @@
         async function scanWebsite(event) {
             event.preventDefault();
             const rawUrl = urlInput.value.trim();
-
             try {
-                // 1. Validation and Sanitization
                 const scannedUrl = validateAndSanitizeUrl(rawUrl);
-                
                 toggleLoading(true);
-
-                // 2. Perform Simulated API Call
                 const result = await simulateSafeBrowsing(scannedUrl);
-                
-                // 3. Display Results
                 displayResult(result, scannedUrl);
-
             } catch (error) {
                 console.error("Scan Error:", error);
                 errorMessage.textContent = `Error: ${error.message}`;
                 errorMessage.classList.remove('hidden');
             } finally {
-                toggleLoading(false);
+                toggleLoading(false); 
             }
         }
 
         function resetApp() {
-            // Clear previous results and error messages
             errorMessage.classList.add('hidden');
-            // Reset result card classes to default, clearing status-specific styles
             resultCard.className = 'p-8 md:p-12 rounded-2xl transition-all duration-500 result-card-glow'; 
-            resultCard.style.backgroundColor = 'var(--card-bg)'; // Explicitly set default background
-            resultSection.style.opacity = '0'; // Start fade out
-
-            // Hide result section and show input section after a brief delay
+            resultCard.style.backgroundColor = 'var(--card-bg)'; 
+            resultSection.style.opacity = '0'; 
             setTimeout(() => {
                 resultSection.classList.add('hidden');
                 inputSection.classList.remove('hidden');
                 inputSection.scrollIntoView({ behavior: 'smooth' });
-                 // Ensure the icon animation is removed when resetting
                 resultIcon.classList.remove('animate-bounce'); 
-            }, 500); // 500ms delay to allow fade transition
-            
-            // Optional: Clear the input field
-            // urlInput.value = '';
+            }, 500); 
         }
 
-        // --- New Function to Toggle Projects Showcase ---
         function toggleProjects() {
             if (projectsShowcase.classList.contains('hidden')) {
-                // Show the section
                 projectsShowcase.classList.remove('hidden');
-                
-                // Force reflow for transition
                 void projectsShowcase.offsetWidth; 
                 projectsShowcase.style.opacity = '1';
-
-                // Update button text
                 projectsBtn.innerHTML = 'Collapse Projects &uarr;';
-
-                // Scroll down to the new section smoothly
                 projectsShowcase.scrollIntoView({ behavior: 'smooth' });
             } else {
-                // Hide the section
                 projectsShowcase.style.opacity = '0';
-                
-                // Wait for fade transition before hiding completely
                 setTimeout(() => {
                     projectsShowcase.classList.add('hidden');
-                    // Update button text
                     projectsBtn.innerHTML = 'Explore Projects &darr;';
-                }, 700); // Matches the duration-700 transition
+                }, 700); 
             }
         }
-        // --- End New Function ---
-
 
         // Initialize on load
         document.addEventListener('DOMContentLoaded', () => {
-            // Ensure the result section is hidden and opaque on initial load
             resultSection.classList.add('hidden');
             resultSection.style.opacity = '0'; 
-            // Ensure projects are hidden on load
             projectsShowcase.classList.add('hidden');
             projectsShowcase.style.opacity = '0';
         });
